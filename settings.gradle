@@ -1,1 +1,1 @@
-include ':app', ':BaiduTraceSDK_v2_1_9'
+include ':app', ':BaiduTraceSDK_v2_1_9', ':baidumapapi_base_v3_7_1', ':baidumapapi_cloud_v3_7_1', ':baidumapapi_map_v3_7_1', ':baidumapapi_radar_v3_7_1', ':baidumapapi_search_v3_7_1', ':baidumapapi_util_v3_7_1', ':gson-2.2.1'

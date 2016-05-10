@@ -5,6 +5,13 @@
       <module fileurl="file://$PROJECT_DIR$/BaiduTraceSDK_v2_1_9/BaiduTraceSDK_v2_1_9.iml" filepath="$PROJECT_DIR$/BaiduTraceSDK_v2_1_9/BaiduTraceSDK_v2_1_9.iml" />
       <module fileurl="file://$PROJECT_DIR$/CubeRunning.iml" filepath="$PROJECT_DIR$/CubeRunning.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/baidumapapi_base_v3_7_1/baidumapapi_base_v3_7_1.iml" filepath="$PROJECT_DIR$/baidumapapi_base_v3_7_1/baidumapapi_base_v3_7_1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/baidumapapi_cloud_v3_7_1/baidumapapi_cloud_v3_7_1.iml" filepath="$PROJECT_DIR$/baidumapapi_cloud_v3_7_1/baidumapapi_cloud_v3_7_1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/baidumapapi_map_v3_7_1/baidumapapi_map_v3_7_1.iml" filepath="$PROJECT_DIR$/baidumapapi_map_v3_7_1/baidumapapi_map_v3_7_1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/baidumapapi_radar_v3_7_1/baidumapapi_radar_v3_7_1.iml" filepath="$PROJECT_DIR$/baidumapapi_radar_v3_7_1/baidumapapi_radar_v3_7_1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/baidumapapi_search_v3_7_1/baidumapapi_search_v3_7_1.iml" filepath="$PROJECT_DIR$/baidumapapi_search_v3_7_1/baidumapapi_search_v3_7_1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/baidumapapi_util_v3_7_1/baidumapapi_util_v3_7_1.iml" filepath="$PROJECT_DIR$/baidumapapi_util_v3_7_1/baidumapapi_util_v3_7_1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gson-2.2.1/gson-2.2.1.iml" filepath="$PROJECT_DIR$/gson-2.2.1/gson-2.2.1.iml" />
     </modules>
   </component>
 </project>

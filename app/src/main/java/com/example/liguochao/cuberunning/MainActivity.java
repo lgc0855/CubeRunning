@@ -9,11 +9,18 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.MapView;
 import com.baidu.trace.LBSTraceClient;
 import com.baidu.trace.OnStartTraceListener;
 import com.baidu.trace.OnStopTraceListener;
 import com.baidu.trace.OnTrackListener;
 import com.baidu.trace.Trace;
+
+import org.json.JSONException;
+
+import util.JsonPaser;
 
 public class MainActivity extends AppCompatActivity {
     Trace trace ;
@@ -31,15 +38,20 @@ public class MainActivity extends AppCompatActivity {
     //轨迹服务类型（0 : 不上传位置数据，也不接收报警信息； 1 : 不上传位置数据，但接收报警信息；2 : 上传位置数据，且接收报警信息）
     int  traceType = 2;
 
+    protected static BaiduMap mBaiduMap = null;
+    protected static MapView bmapView = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_main);
         Button start = (Button)findViewById(R.id.start) ;
         Button stop = (Button)findViewById(R.id.stop) ;
         Button qurey = (Button)findViewById(R.id.qurey) ;
         final TextView message_callback = (TextView)findViewById(R.id.message_callback) ;
+        bmapView = (MapView) findViewById(R.id.bmapView);
         initTrace();
 
 
@@ -102,8 +114,13 @@ public class MainActivity extends AppCompatActivity {
             public void onQueryHistoryTrackCallback(String arg0) {
                 // TODO Auto-generated method stub
                 super.onQueryHistoryTrackCallback(arg0);
-                message_callback.setText(arg0);
                 Log.d("Main", arg0) ;
+                try {
+                    message_callback.setText("您今天一共跑了" + new JsonPaser().parser(arg0) + "米");
+                    new TraceShow().showHistoryTrack(arg0);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
         };
@@ -114,12 +131,15 @@ public class MainActivity extends AppCompatActivity {
 
 
     void initTrace(){
+
         //实例化轨迹服务客户端
         client = new LBSTraceClient(getApplicationContext());
         //entity标识
         entityName = "mycar";
         //实例化轨迹服务
         trace = new Trace(getApplicationContext(), serviceId, entityName, traceType);
+        mBaiduMap = bmapView.getMap();
+        bmapView.showZoomControls(false);
         //实例化开启轨迹服务回调接口
         startTraceListener = new OnStartTraceListener() {
             //开启轨迹服务回调接口（arg0 : 消息编码，arg1 : 消息内容，详情查看类参考）
