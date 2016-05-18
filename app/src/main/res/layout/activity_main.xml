@@ -31,6 +31,7 @@
         android:layout_below="@+id/re"/>
 
     <LinearLayout
+        android:id="@+id/line1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -54,6 +55,13 @@
             android:layout_height="wrap_content"
             android:text="查询历史轨迹"/>
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/message_weather"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="false"
+        android:layout_below="@+id/line1"/>
 
 
 </RelativeLayout>

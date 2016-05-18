@@ -21,6 +21,7 @@ import com.baidu.trace.Trace;
 import org.json.JSONException;
 
 import util.JsonPaser;
+import util.WeatherPaser;
 
 public class MainActivity extends AppCompatActivity {
     Trace trace ;
@@ -52,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         Button qurey = (Button)findViewById(R.id.qurey) ;
         final TextView message_callback = (TextView)findViewById(R.id.message_callback) ;
         bmapView = (MapView) findViewById(R.id.bmapView);
+        new WeatherPaser().execute() ;
+
         initTrace();
 
 
