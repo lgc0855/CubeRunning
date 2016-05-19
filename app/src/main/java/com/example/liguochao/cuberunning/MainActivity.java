@@ -38,6 +38,16 @@ public class MainActivity extends AppCompatActivity {
     final long serviceId  =  115846  ;
     //轨迹服务类型（0 : 不上传位置数据，也不接收报警信息； 1 : 不上传位置数据，但接收报警信息；2 : 上传位置数据，且接收报警信息）
     int  traceType = 2;
+    //启动跑步 的时间
+    int startTime ;
+
+    //查询轨迹线程
+    Thread thread ;
+
+    //路程
+    double dis = 0 ;
+
+    TextView message_callback ;
 
     protected static BaiduMap mBaiduMap = null;
     protected static MapView bmapView = null;
@@ -51,34 +61,59 @@ public class MainActivity extends AppCompatActivity {
         Button start = (Button)findViewById(R.id.start) ;
         Button stop = (Button)findViewById(R.id.stop) ;
         Button qurey = (Button)findViewById(R.id.qurey) ;
-        final TextView message_callback = (TextView)findViewById(R.id.message_callback) ;
+        message_callback = (TextView)findViewById(R.id.message_callback) ;
         bmapView = (MapView) findViewById(R.id.bmapView);
         new WeatherPaser().execute() ;
 
         initTrace();
 
-
-        start.setOnClickListener(new View.OnClickListener() {
+        thread = new Thread(){
             @Override
-            public void onClick(View v) {
-                client.startTrace(trace, startTraceListener);
-            }
-        });
-
-        qurey.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            public void run() {
                 int simpleReturn = 0 ;
-                int startTime = (int) (System.currentTimeMillis() / 1000 - 12 * 60 * 60);
-                int endTime = (int) (System.currentTimeMillis() / 1000);
                 // 分页大小
                 int pageSize = 1000;
                 // 分页索引
                 int pageIndex = 1;
-                client.queryHistoryTrack(serviceId, entityName, simpleReturn, startTime
-                        , endTime, pageSize, pageIndex, trackListener);
+                while(true){
+                    try {
+                        Thread.sleep(600);
+                        int endTime = (int) (System.currentTimeMillis() / 1000);
+                        client.queryHistoryTrack(serviceId, entityName, simpleReturn, startTime
+                                , endTime, pageSize, pageIndex, trackListener);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        } ;
+
+
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startTime = (int) (System.currentTimeMillis() / 1000);
+                client.startTrace(trace, startTraceListener);
+                if(!thread.isAlive())
+                thread.start();
             }
         });
+
+
+//        qurey.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int simpleReturn = 0 ;
+//                int startTime = (int) (System.currentTimeMillis() / 1000 - 12 * 60 * 60);
+//                int endTime = (int) (System.currentTimeMillis() / 1000);
+//                // 分页大小
+//                int pageSize = 1000;
+//                // 分页索引
+//                int pageIndex = 1;
+//                client.queryHistoryTrack(serviceId, entityName, simpleReturn, startTime
+//                        , endTime, pageSize, pageIndex, trackListener);
+//            }
+//        });
 
 
         stop.setOnClickListener(new View.OnClickListener() {
@@ -119,7 +154,12 @@ public class MainActivity extends AppCompatActivity {
                 super.onQueryHistoryTrackCallback(arg0);
                 Log.d("Main", arg0) ;
                 try {
-                    message_callback.setText("您今天一共跑了" + new JsonPaser().parser(arg0) + "米");
+                    String distance = new JsonPaser().parser(arg0) ;
+                    Log.d("MainCallback","distance is " + distance) ;
+                    dis = Double.parseDouble(distance);
+                    Log.d("Main", "this is callback") ;
+                    message_callback.setText("您一共跑了" +dis + "米\n"
+                            + " 消耗卡路里 ：" + dis * 50 * 1.036 + "kcal" );
                     new TraceShow().showHistoryTrack(arg0);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -127,7 +167,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         };
-
 
 
     }
@@ -160,6 +199,7 @@ public class MainActivity extends AppCompatActivity {
         client.startTrace(trace, startTraceListener);
 
         client.startTrace(trace, startTraceListener);
+
 
 
     }
