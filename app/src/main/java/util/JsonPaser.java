@@ -27,6 +27,11 @@ public class JsonPaser {
     final String TAG = "JsonPaser"  ;
     WeatherMessage weatherMessage = new WeatherMessage() ;
 
+    // 可调用此函数获取天气信息
+    public WeatherMessage getWeatherMessage() {
+        return weatherMessage;
+    }
+
     public String parser(String s) throws JSONException {
         JSONObject obj = new JSONObject(s) ;
         String sl = obj.getString("distance") ;

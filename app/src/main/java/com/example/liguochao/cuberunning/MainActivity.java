@@ -1,5 +1,9 @@
 package com.example.liguochao.cuberunning;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,10 +24,18 @@ import com.baidu.trace.Trace;
 
 import org.json.JSONException;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import db.DBOperate;
+import db.Person;
+import db.PersonDBHelper;
+import db.PersonMessage;
 import util.JsonPaser;
 import util.WeatherPaser;
 
 public class MainActivity extends AppCompatActivity {
+    static  Context con ;
     Trace trace ;
     LBSTraceClient client;
     OnStartTraceListener startTraceListener ;
@@ -52,6 +64,11 @@ public class MainActivity extends AppCompatActivity {
     protected static BaiduMap mBaiduMap = null;
     protected static MapView bmapView = null;
 
+    public static Context get(){
+        return con ;
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +81,10 @@ public class MainActivity extends AppCompatActivity {
         message_callback = (TextView)findViewById(R.id.message_callback) ;
         bmapView = (MapView) findViewById(R.id.bmapView);
         new WeatherPaser().execute() ;
-
         initTrace();
+        //数据库测试函数
+        dbTest() ;
+        con = getApplication() ;
 
         thread = new Thread(){
             @Override
@@ -202,5 +221,23 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+    //数据库测试函数
+    private void dbTest(){
+        Log.d("DB", "This is in dbTest");
+        Context context = getApplicationContext() ;
+        DBOperate dbOperate = new DBOperate();
+        dbOperate.createPerson(context,"蓝耗虚","SB" , "2B","女",5,1,1000,0,0) ;
+        ArrayList<PersonMessage> list = dbOperate.queryMessage(context,"蓝耗虚") ;
+
+        Log.d("MainDB","list's length is "+list.size()) ;
+        for(int i = 0 ; i < list.size() ; i++ ){
+            Log.d("MainDB" , list.get(i).getName() + "   " + list.get(i).getValue()) ;
+        }
+//        for (PersonMessage p :
+//                list) {
+//            Log.d("MainDB", p.getName() + "    " + p.getValue());
+//        }
     }
 }
