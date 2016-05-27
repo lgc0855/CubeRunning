@@ -1,5 +1,7 @@
 package com.example.liguochao.cuberunning;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -27,6 +29,12 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.List;
 
+import Inter.InfoFragment;
+import Inter.MainFragment;
+import Inter.NavigationInfo;
+import Inter.NavigationMain;
+import Inter.NavigationRank;
+import Inter.RankFragment;
 import db.DBOperate;
 import db.Person;
 import db.PersonDBHelper;
@@ -35,7 +43,7 @@ import util.JsonPaser;
 import util.WeatherPaser;
 
 public class MainActivity extends AppCompatActivity {
-    static  Context con ;
+    private static  Context con ;
     Trace trace ;
     LBSTraceClient client;
     OnStartTraceListener startTraceListener ;
@@ -68,18 +76,37 @@ public class MainActivity extends AppCompatActivity {
         return con ;
     }
 
+    private InfoFragment infoFragment = new InfoFragment();
+    private MainFragment mainFragment = new MainFragment();
+    private RankFragment rankFragment = new RankFragment();
+    private NavigationRank navigationRank = new NavigationRank();
+    private NavigationMain navigationMain = new NavigationMain();
+    private NavigationInfo navigationInfo = new NavigationInfo();
+
+    public static  Context getContext() {
+        return con;
+    }
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SDKInitializer.initialize(getApplicationContext());
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main_layout);
         Button start = (Button)findViewById(R.id.start) ;
         Button stop = (Button)findViewById(R.id.stop) ;
         Button qurey = (Button)findViewById(R.id.qurey) ;
         message_callback = (TextView)findViewById(R.id.message_callback) ;
         bmapView = (MapView) findViewById(R.id.bmapView);
+
+
+        con = getApplicationContext();
+        init();
+        showRankButton();
+        showMainButton();
+        showInfoButton();
+
         new WeatherPaser().execute() ;
         initTrace();
         //数据库测试函数
@@ -239,5 +266,69 @@ public class MainActivity extends AppCompatActivity {
 //                list) {
 //            Log.d("MainDB", p.getName() + "    " + p.getValue());
 //        }
+    }
+
+
+    private void showInfoButton() {
+        Button btn_info;
+        btn_info = (Button) findViewById(R.id.btn_navigation_info);
+        btn_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_main,infoFragment);
+                fragmentTransaction.replace(R.id.frame_navigation_bottom,navigationInfo);
+                fragmentTransaction.commit();
+            }
+        });
+    }
+
+    private void showMainButton() {
+        Button btn_main;
+        btn_main = (Button) findViewById(R.id.btn_navigation_main);
+        btn_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_main,mainFragment);
+                fragmentTransaction.replace(R.id.frame_navigation_bottom,navigationMain);
+                fragmentTransaction.commit();
+            }
+        });
+    }
+
+    private void showRankButton() {
+        Button btn_rank;
+        btn_rank = (Button) findViewById(R.id.btn_navigation_rank);
+        btn_rank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_main, rankFragment);
+                fragmentTransaction.replace(R.id.frame_navigation_bottom, navigationRank);
+                fragmentTransaction.commit();
+
+            }
+        });
+    }
+
+
+    private void init() {
+    /*    infoFragment = new InfoFragment();
+        rankFragment = new RankFragment();
+        mainFragment = new MainFragment();
+        navigationMain = new NavigationMain();
+        navigationRank = new NavigationRank();
+        navigationInfo = new NavigationInfo();*/
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.frame_main,mainFragment);
+        fragmentTransaction.add(R.id.frame_navigation_bottom,navigationMain);
+
+        fragmentTransaction.commit();
+
     }
 }

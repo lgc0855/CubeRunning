@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">CubeRunning</string>
+    <string name="app_firstName">Cube</string>
+    <string name="app_secondName">Running</string>
+    <string name="login">Login</string>
 </resources>

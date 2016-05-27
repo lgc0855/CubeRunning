@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@android:color/white"
+    android:layout_height="70dp">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_weight="2"
+        android:layout_height="0dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_weight="8"
+        android:layout_height="0dp">
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:src="@drawable/head_icon"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="XXX"
+                android:textSize="25sp"
+                android:textColor="@android:color/black"
+                android:layout_height="25dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="第x名"
+                android:textSize="16sp"
+                android:textColor="#B0AEA4"
+                android:layout_height="match_parent" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="6"
+            android:textSize="35sp"
+            android:gravity="center_vertical|end"
+            android:text="6666"
+            android:textColor="#6DDD22"
+            android:layout_height="match_parent" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_weight="3"
+        android:layout_height="0dp" />
+
+</LinearLayout>

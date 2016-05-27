@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@drawable/run_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:id="@+id/text_dis"
+                android:text="0.00"
+                android:textColor="@android:color/white"
+                android:layout_centerInParent="true"
+                android:textSize="50sp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:textSize="20sp"
+                android:text="km"
+                android:layout_toRightOf="@id/text_dis"
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentBottom="true"
+                android:textColor="@android:color/holo_red_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_marginTop="15dp"
+            android:layout_height="50dp">
+            
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:text="配速(km/h)"
+                    android:gravity="center"
+                    android:layout_height="0dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/white"
+                    android:gravity="center"
+                    android:text="6.0"
+                    android:layout_height="0dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:text="时长(h)"
+                    android:gravity="center"
+                    android:layout_height="0dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/white"
+                    android:gravity="center"
+                    android:text="1.1"
+                    android:layout_height="0dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:text="热量(卡)"
+                    android:gravity="center"
+                    android:layout_height="0dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/white"
+                    android:gravity="center"
+                    android:text="111"
+                    android:layout_height="0dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:text="&lt;finish!&gt;"
+                android:textSize="35sp"
+                android:textColor="@android:color/white"
+                android:background="@android:color/transparent"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>
